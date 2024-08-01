@@ -1,7 +1,7 @@
 {
   "name": "@thunkworks/hooks",
   "main": "src/index.ts",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "description": "Thunkworks Hooks",
   "homepage": "https://thunkworks.dev/",
