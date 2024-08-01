@@ -1,0 +1,36 @@
+{
+  "name": "@thunkworks/core",
+  "main": "src/index.ts",
+  "version": "0.0.0",
+  "license": "MIT",
+  "description": "Thunkworks Core",
+  "homepage": "https://thunkworks.dev/",
+  "author": "Andrew Lenhart <andrew@thunkworks.dev>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thunkworksdev/thunkworks.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/thunkworksdev/thunkworks/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --dts"
+  },
+  "devDependencies": {
+    "@types/eslint": "^9.6.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@thunkworks/hooks": "workspace:*",
+    "react": "^18",
+    "react-dom": "^18"
+  }
+}
