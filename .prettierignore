@@ -1,0 +1,11 @@
+# Ignore artifacts:
+
+dist
+build
+node_modules
+LICENSE
+
+.vscode
+.eslintignore
+.gitignore
+.git
