@@ -1,16 +1,34 @@
 {
   "name": "thunkworks",
   "private": true,
+  "author": {
+    "name": "Andrew Lenhart",
+    "email": "andrew@thunkworks.dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thunkworksdev/thunkworks"
+  },
+  "bugs": {
+    "url": "https://github.com/thunkworksdev/thunkworks/issues"
+  },
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint"
+    "lint": "turbo lint",
+    "publish": "turbo run build lint && changeset version && changeset publish",
+    "format:check": "prettier --check packages/**/**/src --cache",
+    "format:write": "prettier --write packages/**/**/src --cache"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.7",
+    "prettier": "^3.3.3",
+    "tsup": "^8.2.3",
+    "turbo": "^2.0.11",
+    "typescript": "^5.5.4"
   },
   "packageManager": "pnpm@8.15.6",
   "engines": {
     "node": ">=18"
-  },
-  "dependencies": {
-    "prettier": "^3.3.3"
   }
 }
