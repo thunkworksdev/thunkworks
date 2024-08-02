@@ -17,6 +17,8 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "publish": "turbo run build lint && changeset version && changeset publish",
+    "version": "changeset version",
+    "release": "changeset publish",
     "format:check": "prettier --check packages/**/**/src --cache",
     "format:write": "prettier --write packages/**/**/src --cache"
   },
