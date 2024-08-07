@@ -1,21 +1,19 @@
 {
-  "name": "@thunkworks/core",
+  "name": "@thunkworks/style",
   "main": "src/index.ts",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "license": "MIT",
+  "private": true,
   "author": "Andrew Lenhart <andrew@thunkworks.dev>",
   "homepage": "https://thunkworks.dev/",
-  "description": "Thunkworks Core",
+  "description": "Thunkworks Style API",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/thunkworksdev/thunkworks.git",
-    "directory": "packages/core"
+    "directory": "packages/style"
   },
   "bugs": {
     "url": "https://github.com/thunkworksdev/thunkworks/issues"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "scripts": {
     "build": "tsup src/index.ts --dts"
@@ -30,7 +28,6 @@
   },
   "dependencies": {
     "@thunkworks/hooks": "workspace:*",
-    "@thunkworks/style": "workspace:*",
     "@thunkworks/types": "workspace:*",
     "clsx": "^2.1.1",
     "react": "^18",

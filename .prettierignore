@@ -9,3 +9,9 @@ LICENSE
 .eslintignore
 .gitignore
 .git
+
+# *.d.ts
+
+# types\src\index.ts
+
+packages/types/src*

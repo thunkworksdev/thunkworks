@@ -1,42 +1,80 @@
-import { Factory, createPolymorphicFactory } from '../../factory';
-import { UnstyledButton, UnstyledButtonProps } from '../UnstyledButton';
+import './Button.css';
+import React from 'react';
+import { THUNKWORKS } from '@thunkworks/types';
+import { useClassNames } from '@thunkworks/style';
+import { UnstyledButtonProps } from '../UnstyledButton';
+import { createFactoryPolymorphic } from '../../factory';
+
+export type ButtonVariant = 'default' | 'accent';
+
+export type ButtonClassNames = 'root' | 'label' | 'layout' | 'content';
 
 export interface ButtonProps extends UnstyledButtonProps {
-  /** Defines the content placed to the left of the button label. */
+  /** Defines the content placed to the left of the label. */
   leftContent?: React.ReactNode;
 
-  /** Defines the content placed to the right of the button label. */
+  /** Defines the content placed to the right of the label. */
   rightContent?: React.ReactNode;
 }
 
-type ButtonFactory = Factory.Config<{
-  ref: HTMLButtonElement;
-  comp: 'button';
-  props: ButtonProps;
+export type ButtonFactory = THUNKWORKS.Factory<{
+  component: 'button';
+  reference: HTMLButtonElement;
+  classNames: ButtonClassNames;
+  properties: ButtonProps;
+  variant: ButtonVariant;
 }>;
 
-export const Button = createPolymorphicFactory<ButtonFactory>((props, ref) => {
+const defaultProps: {
+  variant: ButtonVariant;
+  classNames: Record<ButtonClassNames, string>;
+} = {
+  variant: 'default',
+  classNames: {
+    root: 'thwx-button-root',
+    label: 'thwx-button-label',
+    layout: 'thwx-button-layout',
+    content: 'thwx-button-content',
+  },
+};
+
+export const Button = createFactoryPolymorphic<ButtonFactory>((props, ref) => {
   const {
     loading,
-    children,
     disabled,
+    children,
+    className,
+    classNames,
     leftContent,
     rightContent,
-    as: Component = UnstyledButton,
+    as: Component = 'button',
     ...otherProps
   } = props;
 
   const hasLeftContent = !!leftContent;
   const hasRightContent = !!rightContent;
 
+  const { css } = useClassNames({
+    defaultProps,
+    classNames,
+  });
+
   return (
-    <Component ref={ref} loading={loading} disabled={disabled} {...otherProps}>
-      <span>
-        {hasLeftContent && <span data-position="left">{leftContent}</span>}
+    <Component className={css.root} ref={ref} {...otherProps}>
+      <span className={css.layout}>
+        {hasLeftContent && (
+          <span className={css.content} data-position="left">
+            {leftContent}
+          </span>
+        )}
 
-        <span>{children}</span>
+        <div className={css.label}>{children}</div>
 
-        {hasRightContent && <span data-position="right">{rightContent}</span>}
+        {hasRightContent && (
+          <span className={css.content} data-position="right">
+            {rightContent}
+          </span>
+        )}
       </span>
     </Component>
   );
