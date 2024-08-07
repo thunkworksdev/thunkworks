@@ -11,6 +11,8 @@
   "dependencies": {
     "@thunkworks/core": "workspace:*",
     "@thunkworks/hooks": "workspace:*",
+    "@thunkworks/style": "workspace:*",
+    "@thunkworks/types": "workspace:*",
     "react": "^18",
     "react-dom": "^18",
     "next": "14.2.5"
