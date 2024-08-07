@@ -1,3 +1,3 @@
-export function keys<T extends Record<string, any>, K extends keyof T>(props: T): K[] {
-  return Object.keys(props) as K[];
-}
+import { THUNKWORKS } from '@thunkworks/types';
+
+export const keys: typeof THUNKWORKS.keys = (obj) => Object.keys(obj);
