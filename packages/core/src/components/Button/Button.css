@@ -1,4 +1,4 @@
-.thwx-button-root {
+.thwx-button {
   --thwx-button-height-xs: 30px;
   --thwx-button-height-sm: 36px;
   --thwx-button-height-md: 42px;
@@ -21,7 +21,7 @@
   display: var(--thwx-button-display);
 }
 
-.thwx-button-root[data-block] {
+.thwx-button[data-block] {
   --thwx-button-display: block;
 }
 
