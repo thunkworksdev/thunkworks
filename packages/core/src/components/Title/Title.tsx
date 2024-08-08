@@ -3,7 +3,7 @@ import { THUNKWORKS } from '@thunkworks/types';
 import { findComponent } from '../../utils';
 import { createFactoryPolymorphic } from '../../factory';
 
-export type TitleProps = THUNKWORKS.TitleElementTypeProps & {};
+export type TitleProps = THUNKWORKS.TitleElementProps & {};
 
 export type TitleFactory = THUNKWORKS.Factory<{
   component: 'h2';
