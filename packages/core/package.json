@@ -1,7 +1,7 @@
 {
   "name": "@thunkworks/core",
   "main": "src/index.ts",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "author": "Andrew Lenhart <andrew@thunkworks.dev>",
   "homepage": "https://thunkworks.dev/",

@@ -3,7 +3,6 @@
   "main": "src/index.ts",
   "version": "0.1.0",
   "license": "MIT",
-  "private": true,
   "author": "Andrew Lenhart <andrew@thunkworks.dev>",
   "homepage": "https://thunkworks.dev/",
   "description": "Thunkworks Types",
