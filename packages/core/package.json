@@ -3,9 +3,9 @@
   "main": "src/index.ts",
   "version": "0.1.1",
   "license": "MIT",
-  "description": "Thunkworks Core",
-  "homepage": "https://thunkworks.dev/",
   "author": "Andrew Lenhart <andrew@thunkworks.dev>",
+  "homepage": "https://thunkworks.dev/",
+  "description": "Thunkworks Core",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/thunkworksdev/thunkworks.git",
@@ -30,6 +30,9 @@
   },
   "dependencies": {
     "@thunkworks/hooks": "workspace:*",
+    "@thunkworks/style": "workspace:*",
+    "@thunkworks/types": "workspace:*",
+    "clsx": "^2.1.1",
     "react": "^18",
     "react-dom": "^18"
   }

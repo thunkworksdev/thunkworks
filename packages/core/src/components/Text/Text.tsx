@@ -1,33 +1,23 @@
-import React from 'react';
+import './Text.css';
+import { THUNKWORKS } from '@thunkworks/types';
 import { findComponent } from '../../utils';
-import { createPolymorphicFactory, Factory } from '../../factory';
+import { createFactoryPolymorphic } from '../../factory';
 
-export interface TextElementProps {
-  /**
-   * Specifies a render type for the component.
-   * @default 'p'
-   */
-  as?: React.ElementType;
-  /**
-   * Specifies a shorthand render type for the element. If specified the component will render as a html `h1` element.
-   * This will not override the components `as` property.
-   * @default undefined
-   */
+export interface TextProps {
   span?: boolean;
 }
 
-export interface TextProps extends TextElementProps {}
-
-type TextFactory = Factory.Config<{
-  ref: HTMLParagraphElement;
-  props: TextProps;
-  comp: 'p';
+type TextFactory = THUNKWORKS.Factory<{
+  component: 'p';
+  reference: HTMLParagraphElement;
+  properties: TextProps;
+  classNames: THUNKWORKS.ClassNames['Text'];
 }>;
 
-export const Text = createPolymorphicFactory<TextFactory>((props, ref) => {
-  const { as, span, children, ...otherProps } = props;
+export const Text = createFactoryPolymorphic<TextFactory>((props, ref) => {
+  const { as = 'p', span, children, ...otherProps } = props;
 
-  const Component = findComponent({ as, span, defaultAs: 'p' });
+  const Component = findComponent({ span }, as);
 
   return (
     <Component ref={ref} {...otherProps}>

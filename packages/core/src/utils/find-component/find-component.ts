@@ -1,18 +1,6 @@
-import { keys } from '../object-keys/object-keys';
+import { THUNKWORKS } from '@thunkworks/types';
 
-export type FindComponentOptions = {
-  as?: keyof JSX.IntrinsicElements;
-  defaultAs?: keyof JSX.IntrinsicElements;
+export const findComponent: typeof THUNKWORKS.findComponent = (props, fallback) => {
+  const keys = Object.keys(props) as (keyof React.JSX.IntrinsicElements)[];
+  return keys.find((key) => props[key] !== undefined) || fallback;
 };
-
-export type FindComponentProps = FindComponentOptions &
-  Partial<{
-    [Key in keyof JSX.IntrinsicElements]: boolean;
-  }>;
-
-export function findComponent(props: FindComponentProps): React.ElementType {
-  const { as, defaultAs = 'div', ...otherProps } = props;
-  const shortKeys = keys(otherProps);
-  const shortAs = shortKeys.find((k) => otherProps[k] !== undefined);
-  return as || shortAs || defaultAs;
-}

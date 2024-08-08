@@ -1,7 +1,6 @@
-import { forwardRef } from 'react';
-import { Factory } from '../types';
+import React from 'react';
+import { THUNKWORKS } from '@thunkworks/types';
 
-export function createFactory<Payload extends Factory.Payload>(ui: Factory.Render<Payload>) {
-  const Component = forwardRef(ui) as Factory.Component<Payload>;
-  return Component as Factory.Component<Payload> & Factory.Components<Payload['comps']>;
+export function createFactory<P extends THUNKWORKS.Payload>(ui: THUNKWORKS.ComponentRender<P>) {
+  return React.forwardRef(ui) as THUNKWORKS.Component<P>;
 }
