@@ -5,33 +5,23 @@ import { useClassNames } from '@thunkworks/style';
 import { UnstyledButtonProps } from '../UnstyledButton';
 import { createFactoryPolymorphic } from '../../factory';
 
-export type ButtonVariant = 'default' | 'accent';
-
-export type ButtonClassNames = 'root' | 'label' | 'layout' | 'content';
-
 export interface ButtonProps extends UnstyledButtonProps {
-  /** Defines the content placed to the left of the label. */
   leftContent?: React.ReactNode;
-
-  /** Defines the content placed to the right of the label. */
   rightContent?: React.ReactNode;
 }
 
 export type ButtonFactory = THUNKWORKS.Factory<{
   component: 'button';
   reference: HTMLButtonElement;
-  classNames: ButtonClassNames;
   properties: ButtonProps;
-  variant: ButtonVariant;
+  classNames: THUNKWORKS.ClassNames['Button'];
+  variant: THUNKWORKS.Variants['Button'];
 }>;
 
-const defaultProps: {
-  variant: ButtonVariant;
-  classNames: Record<ButtonClassNames, string>;
-} = {
+const defaultProps = {
   variant: 'default',
   classNames: {
-    root: 'thwx-button-root',
+    root: 'thwx-button',
     label: 'thwx-button-label',
     layout: 'thwx-button-layout',
     content: 'thwx-button-content',
@@ -54,10 +44,7 @@ export const Button = createFactoryPolymorphic<ButtonFactory>((props, ref) => {
   const hasLeftContent = !!leftContent;
   const hasRightContent = !!rightContent;
 
-  const { css } = useClassNames({
-    defaultProps,
-    classNames,
-  });
+  const { css } = useClassNames({ defaultProps, classNames });
 
   return (
     <Component className={css.root} ref={ref} {...otherProps}>

@@ -2,8 +2,6 @@ import './Group.css';
 import { THUNKWORKS } from '@thunkworks/types';
 import { createFactoryPolymorphic } from '../../factory';
 
-export type GroupClassNames = 'root';
-
 export interface GroupProps {
   orientation?: THUNKWORKS.Orientation | undefined;
 }
@@ -11,8 +9,9 @@ export interface GroupProps {
 export type GroupFactory = THUNKWORKS.Factory<{
   component: 'div';
   reference: HTMLDivElement;
-  classNames: GroupClassNames;
   properties: GroupProps;
+  classNames: THUNKWORKS.ClassNames['Group'];
+  variant: THUNKWORKS.Variants['Group'];
 }>;
 
 export const Group = createFactoryPolymorphic<GroupFactory>((props, ref) => {

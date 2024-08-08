@@ -1,24 +1,23 @@
-import React from 'react';
+import './Text.css';
 import { THUNKWORKS } from '@thunkworks/types';
+import { findComponent } from '../../utils';
 import { createFactoryPolymorphic } from '../../factory';
 
-export type TextClassNames = 'root';
-
-export type TextProps = { span?: boolean };
+export interface TextProps {
+  span?: boolean;
+}
 
 type TextFactory = THUNKWORKS.Factory<{
   component: 'p';
   reference: HTMLParagraphElement;
-  classNames: TextClassNames;
   properties: TextProps;
+  classNames: THUNKWORKS.ClassNames['Text'];
 }>;
 
 export const Text = createFactoryPolymorphic<TextFactory>((props, ref) => {
   const { as = 'p', span, children, ...otherProps } = props;
 
-  let Component: React.ElementType = as;
-
-  if (span) Component = 'span';
+  const Component = findComponent({ span }, as);
 
   return (
     <Component ref={ref} {...otherProps}>
