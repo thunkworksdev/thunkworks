@@ -25,6 +25,12 @@ export declare namespace THUNKWORKS {
 
   export type LengthObject<T = number> = { [Key in Length]: T };
 
+  export type ElementTypeProps = Partial<{ [K in keyof React.JSX.IntrinsicElements]: boolean }>;
+
+  export type TitleElementType = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
+  export type TitleElementTypeProps = Partial<{ [K in TitleElementType]: boolean }>;
+
   export type ClassValue = ClassArray | ClassObj | string | undefined;
 
   export type ClassArray = ClassValue[];
@@ -45,9 +51,6 @@ export declare namespace THUNKWORKS {
 
   export type ClassPrefixerOptions = { prefix?: string; separator?: string };
 
-  export type ComponentTypeProps = Partial<{ [Key in keyof React.JSX.IntrinsicElements]: boolean }>;
-
-  export type ComponentSearchProps = ComponentTypeProps & Partial<{ as: keyof React.JSX.IntrinsicElements; defaultAs: keyof React.JSX.IntrinsicElements }>;
 
   export function noop(): void;
  
@@ -57,7 +60,7 @@ export declare namespace THUNKWORKS {
  
   export function camelToKebabCase(str: string): string;
  
-  export function findComponent(props: ComponentSearchProps): React.ElementType;
+  export function findComponent(props: ElementTypeProps, fallback: keyof React.JSX.IntrinsicElements): React.ElementType;
 
   export function parseClassOptions(input?: Partial<ClassOptions>): ClassOptions;
 
@@ -81,20 +84,81 @@ export declare namespace THUNKWORKS {
     properties?: Record<string, any> | undefined;
     classNames?: any | undefined;
     variant?: any | undefined;
-    tokens?: any | undefined;
+    // tokens?: any | undefined;
   };
   
   export type StyleProps<P extends Payload> = Partial<{
     classNames: Partial<Record<P['classNames'], string>>
-    tokens: Partial<Record<P['tokens'], string>>
+    // tokens: Partial<Record<P['tokens'], string>>
     variant: P['variant'];
   }>;
+
+  export type Variants = {
+    Button: 'default';
+    ButtonGroup: 'default';
+    Checkbox: 'default';
+    CheckboxGroup: 'default';
+    Group: 'default';
+    Input: 'default';
+    Label: 'default';
+    Radio: 'default';
+    RadioGroup: 'default';
+    Switch: 'default';
+    SwitchGroup: 'default';
+    Text: 'default';
+    Title: 'default';
+    UnstyledButton: 'default';
+  }
+
+  export type ClassNames = {
+    Button: 'root' | 'label' | 'layout' | 'content';
+    ButtonGroup: 'root';
+    Checkbox: 'input' | 'indicator';
+    CheckboxGroup: 'root';
+    Group: 'root';
+    Input: 'root' | 'label' | 'message' | 'content';
+    Label: 'root';
+    Radio: 'input' | 'indicator';
+    RadioGroup: 'root';
+    Switch:  'input' | 'indicator';
+    SwitchGroup: 'root';
+    Text: 'root';
+    Title: 'root';
+    UnstyledButton: 'root';
+  }
+
+  // export type Token<K extends string, Values extends string> = `--thwx-${K}-${Values}`;
+
+  // export type FontTokens = `font-${'size' | 'weight' | 'family' | 'style'}`;
+
+  // export type Tokens = {
+  //   Button: Token<'button', 'cursor' | FontTokens | 'line-height'>;
+  //   ButtonGroup: Token<'button', FontTokens | 'line-height'>;
+  //   Checkbox: Token<'checkbox', 'cursor' | FontTokens | 'line-height'>;
+  //   CheckboxGroup: Token<'checkbox-group', 'max-width'>;
+  //   Group: Token<'group', 'max-width'>;
+  //   Input: '';
+  //   Label: Token<'label', FontTokens | 'line-height'>;
+  //   Radio: Token<'radio', 'cursor' | FontTokens | 'line-height'>;
+  //   RadioGroup: Token<'radio-group', 'max-width'>;
+  //   Switch: Token<'switch', 'cursor' | FontTokens | 'line-height'>;
+  //   SwitchGroup: Token<'radio-group', 'max-width'>;
+  //   Text: Token<'text', FontTokens | 'line-height'>;
+  //   Title: Token<'title', FontTokens | 'line-height'>;
+  //   UnstyledButton: '';
+  // }
+
+  export type DefaultProps<K extends keyof ClassNames> = {
+    // tokens: Record<Tokens[K], string>
+    variant: Variants[K];
+    classNames: Record<ClassNames[K], string>
+  } 
 
   export type AsProp<E> = Partial<{ as: E }>
 
   export type ComponentProps<E, P = {}> = E extends React.ElementType
-    ? P & React.ComponentPropsWithoutRef<E> & Partial<{ as: E }>
-    : P & Partial<{ as: React.ElementType }>;
+    ? P & React.ComponentPropsWithoutRef<E>
+    : P;
 
   export type PolymorphicProps<E, P = {}> = E extends React.ElementType
     ? P & React.ComponentPropsWithoutRef<E> & Partial<{ as: E; ref: React.ComponentPropsWithRef<E>['ref'] }>

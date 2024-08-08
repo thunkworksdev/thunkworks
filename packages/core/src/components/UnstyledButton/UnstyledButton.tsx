@@ -1,18 +1,15 @@
 import { THUNKWORKS } from '@thunkworks/types';
 import { createFactoryPolymorphic } from '../../factory';
 
-export type UnstyledButtonClassNames = 'root';
-
 export interface UnstyledButtonProps {
-  disabled?: boolean;
   loading?: boolean;
+  disabled?: boolean;
 }
 
 export type UnstyledButtonFactory = THUNKWORKS.Factory<{
   component: 'button';
   reference: HTMLButtonElement;
   properties: UnstyledButtonProps;
-  classNames: UnstyledButtonClassNames;
 }>;
 
 export const UnstyledButton = createFactoryPolymorphic<UnstyledButtonFactory>((props, ref) => {
