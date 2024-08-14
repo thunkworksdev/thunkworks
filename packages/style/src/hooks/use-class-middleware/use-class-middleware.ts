@@ -1,7 +1,9 @@
 import { THUNKWORKS } from '@thunkworks/types';
 
 export const useClassMiddleware: typeof THUNKWORKS.useClassMiddleware = (options) => {
-  const {} = options;
+  const { prefixer } = options;
+
+  const inject = <K extends string>(key: K, value: string, index: number) => {};
 
   const merge = <K extends string>(
     current: Record<K, string>,
@@ -18,5 +20,5 @@ export const useClassMiddleware: typeof THUNKWORKS.useClassMiddleware = (options
     );
   };
 
-  return { merge };
+  return { merge, inject };
 };
