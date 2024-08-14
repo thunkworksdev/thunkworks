@@ -117,19 +117,29 @@ export declare namespace THUNKWORKS {
  
   export function keys<T extends Record<string, any>>(obj: T): (keyof T)[];
 
+  export function isNode(value: unknown): value is Node;
+
+  export function isElement(value: unknown): value is Element;
+
+  export function isHTMLElement(value: unknown): value is HTMLElement;
+
+  export function isReactElement(value: any): value is React.ReactElement;
+
   export function isEmptyObject(obj: object): boolean;
 
   export function getWindow(node: any): typeof window;
 
-  export function isElement(value: unknown): value is Element;
-
-  export function isReactElement(value: any): value is React.ReactElement;
+  export function getComputedStyle(element: Element): CSSStyleDeclaration
 
   export function camelToKebabCase(str: string): string;
   
   export function capitalizeString(str: string): string;
  
   export function findComponent(props: ElementProps, fallback: keyof React.JSX.IntrinsicElements): React.ElementType;
+
+  export function parseCssToString(css: React.CSSProperties): string;
+
+  export function parseStylesToString(input: StyleInput): string;
 
   export function createEventCallback<T extends HTMLElement, E extends React.SyntheticEvent<T, Event>>(
     handler: (event: E) => void,
@@ -206,6 +216,48 @@ export declare namespace THUNKWORKS {
     Title: 'root';
     UnstyledButton: 'root';
   }
+
+  export type ColorLevel = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+  export type ColorShade = `${ColorLevel}00` | `${ColorLevel}50`;
+
+  export type Count_03 = 1 | 2 | 3;
+  export type Count_06 = Count_03 | 4 | 5 | 6;
+  export type Count_09 = Count_06 | 7 | 8 | 9;
+  export type Count_12 = Count_09 | 10 | 11 | 12;
+  
+  export type Theme = {
+    tokens: {
+      spacing: Record<Count_12, any>;
+      fontSize: Record<Count_12, any>;
+    };
+    colors: {
+      neutral: Record<ColorShade, string>;
+      red: Record<ColorShade, string>;
+      orange: Record<ColorShade, string>;
+      yellow: Record<ColorShade, string>;
+      green: Record<ColorShade, string>;
+      teal: Record<ColorShade, string>;
+      mint: Record<ColorShade, string>;
+      cyan: Record<ColorShade, string>;
+      blue: Record<ColorShade, string>;
+      indigo: Record<ColorShade, string>;
+      purple: Record<ColorShade, string>;
+      pink: Record<ColorShade, string>;
+      brown: Record<ColorShade, string>;
+    }
+  }
+
+  export type StyleMediaQuery = {
+    query: string;
+    styles: React.CSSProperties;
+  };
+
+  export type StyleInput = {
+    selector: string;
+    styles?: React.CSSProperties;
+    media?: StyleMediaQuery[];
+    container?: StyleMediaQuery[];
+  };
 
   export type DefaultProps<K extends keyof ClassNames> = {
     classNames: Record<ClassNames[K], string>
