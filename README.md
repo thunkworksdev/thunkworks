@@ -1,6 +1,6 @@
 # Thunkworks
 
-<img src="./apps/thunkworks.dev/public/images/favicon-white-on-black.png" alt="thunkworks logo" width="200"/>
+<img src="./apps/thunkworks.dev/public/images/brand/png/favicon-white-on-black.png" alt="thunkworks logo" width="200"/>
 
 # Thunkworks UI
 
