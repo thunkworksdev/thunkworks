@@ -1,8 +1,6 @@
-import React from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
-import { Button } from '@thunkworks/core';
 import { Manrope } from 'next/font/google';
+import Link from 'next/link';
 
 const manrope = Manrope({ subsets: ['latin'] });
 
@@ -17,14 +15,46 @@ function NextHead() {
   );
 }
 
+const coreLinks = [
+  {
+    label: 'Text',
+    href: 'core/Text/',
+  },
+  {
+    label: 'Title',
+    href: 'core/Title/',
+  },
+  {
+    label: 'Group',
+    href: 'core/Group/',
+  },
+  {
+    label: 'Radio',
+    href: 'core/Radio/',
+  },
+  {
+    label: 'Button',
+    href: 'core/Button/',
+  },
+  {
+    label: 'Checkbox',
+    href: 'core/Checkbox/',
+  },
+];
+
 export default function Home() {
   return (
-    <React.Fragment>
+    <>
       <NextHead />
       <main className={manrope.className}>
         <h1>Home</h1>
-        <Button>Button</Button>
+
+        {coreLinks.map((item) => (
+          <li key={item.href}>
+            <Link href={item.href}>{item.label}</Link>
+          </li>
+        ))}
       </main>
-    </React.Fragment>
+    </>
   );
 }

@@ -1,12 +1,37 @@
-import { THUNKWORKS } from '@thunkworks/types';
-import { useClassMiddleware } from '../use-class-middleware';
+import clsx from 'clsx';
+import { useClassMiddleware } from '../use-class-middleware/use-class-middleware';
 
-export const useClassNames: typeof THUNKWORKS.useClassNames = (props) => {
-  const { defaultProps, classNames } = props;
+interface ClassNameOptions {
+  rootKey?: string;
+}
 
-  const middleware = useClassMiddleware({});
+interface ClassNameProps<K extends string> {
+  classNames?: Partial<Record<K, string>>;
+  className?: string;
+}
 
-  const css = middleware.merge(defaultProps.classNames, classNames);
+export function useClassNames<K extends string>(
+  obj: Record<K, string>,
+  props: ClassNameProps<K>,
+  options?: ClassNameOptions
+) {
+  const { className, classNames } = props;
+  const { rootKey = 'root' } = options || {};
 
-  return { css };
-};
+  const middleware = useClassMiddleware({
+    className,
+    rootKey,
+  });
+
+  const payload = middleware.merge(obj, classNames);
+
+  const parseRoot = (key: K, value: string): string => {
+    return key === rootKey ? clsx(value, className) : value;
+  };
+
+  const cx = (key: K) => ({
+    className: parseRoot(key, payload[key]),
+  });
+
+  return { cx };
+}

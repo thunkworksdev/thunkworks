@@ -1,24 +1,19 @@
-import cx from 'clsx';
-import React from 'react';
-import { Title, TitleProps } from '@thunkworks/core';
+import Thunkworks from '@thunkworks/types';
+import { PREFIX, Title } from '@thunkworks/core';
 
-type MdxTitleLevel = 1 | 2 | 3 | 4 | 5 | 6;
-type MdxTitleOrder = `h${MdxTitleLevel}`;
-type MdxTitleProps = React.ComponentPropsWithoutRef<'h2'> & TitleProps;
-type MdxTitleComponent = (level: MdxTitleLevel) => React.FC<MdxTitleProps>;
-
-const createTitleElementAs = (level: MdxTitleLevel): MdxTitleOrder => {
-  return ['h', level].join('') as MdxTitleOrder;
+const createTitleElement = (level: Thunkworks.TitleLevel): Thunkworks.TitleOrder => {
+  return ['h', level].join('') as Thunkworks.TitleOrder;
 };
 
-export const MdxTitle: MdxTitleComponent = (level) => {
-  return ({ className, ...forwardedProps }) => {
-    return (
-      <Title
-        as={createTitleElementAs(level)}
-        className={cx(`thwx-mdx-title`, className)}
-        {...forwardedProps}
-      />
-    );
+interface MDXTitleComponent extends Thunkworks.NamedComponent {
+  (level: Thunkworks.TitleLevel): React.FC<Thunkworks.ComponentPropsWithoutRef<'h2'>>;
+}
+
+export const MDXTitle: MDXTitleComponent = (level) => {
+  return ({ ...props }) => {
+    let Component = createTitleElement(level);
+    return <Component className={`${PREFIX}-mdx-title`} {...props} />;
   };
 };
+
+MDXTitle.displayName = '@thunkworks/docs/MDXTitle';

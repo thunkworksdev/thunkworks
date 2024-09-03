@@ -17,7 +17,15 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ES2022"
+    "target": "ES2022",
+    "baseUrl": ".",
+    "paths": {
+      "#*": ["./src/*"],
+      "#components/*": ["./src/components/*"],
+      "#factory/*": ["./src/factory/*"],
+      "#config/*": ["./src/config/*"],
+      "#utils/*": ["./src/utils/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

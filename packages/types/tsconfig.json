@@ -3,7 +3,6 @@
   "compilerOptions": {
     "outDir": "dist",
     "jsx": "react-jsx",
-
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,

@@ -1,26 +1,26 @@
-import './Text.css';
-import { THUNKWORKS } from '@thunkworks/types';
-import { findComponent } from '../../utils';
-import { createFactoryPolymorphic } from '../../factory';
+import Thunkworks from '@thunkworks/types';
+import { useClassNames } from '@thunkworks/style';
+import { PolymorphComponent } from '#factory';
 
-export interface TextProps {
-  span?: boolean;
-}
-
-type TextFactory = THUNKWORKS.Factory<{
-  component: 'p';
-  reference: HTMLParagraphElement;
-  properties: TextProps;
-  classNames: THUNKWORKS.ClassNames['Text'];
+export type TextFactory = Thunkworks.PolymorphFactory<{
+  ref: Thunkworks.IntrinsicRefs['Text'];
+  classNames: Thunkworks.IntrinsicClassNames['Text'];
+  component: Thunkworks.IntrinsicElements['Text'];
+  props: Thunkworks.TextProps;
 }>;
 
-export const Text = createFactoryPolymorphic<TextFactory>((props, ref) => {
-  const { as = 'p', span, children, ...otherProps } = props;
+export const TEXT_CLASSNAMES: Thunkworks.IntrinsicClassNames['Text'] = { root: 'thwx-text' };
 
-  const Component = findComponent({ span }, as);
+export const Text = PolymorphComponent<TextFactory>((props, ref) => {
+  const { children, className, classNames, component: Component = 'p', ...forwardedProps } = props;
+
+  const { cx } = useClassNames(TEXT_CLASSNAMES, {
+    classNames,
+    className,
+  });
 
   return (
-    <Component ref={ref} {...otherProps}>
+    <Component {...forwardedProps} {...cx('root')} ref={ref}>
       {children}
     </Component>
   );

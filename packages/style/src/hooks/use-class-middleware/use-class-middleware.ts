@@ -1,24 +1,22 @@
-import { THUNKWORKS } from '@thunkworks/types';
+export function useClassMiddleware(options: { rootKey?: string; className?: string }) {
+  const { className, rootKey = 'root' } = options;
 
-export const useClassMiddleware: typeof THUNKWORKS.useClassMiddleware = (options) => {
-  const { prefixer } = options;
-
-  const inject = <K extends string>(key: K, value: string, index: number) => {};
+  const keys = <K extends string>(obj: Record<K, string>): K[] => Object.keys(obj) as K[];
 
   const merge = <K extends string>(
     current: Record<K, string>,
-    updates?: Partial<Record<K, string>>
-  ): Record<K, string> => {
-    if (!updates) return current;
-
-    return (Object.keys(current) as K[]).reduce(
+    update?: Partial<Record<K, string>>
+  ) => {
+    return keys(current).reduce(
       (prev, key) => ({
         ...prev,
-        ...{ [key]: updates?.[key] || current[key] },
+        ...{ [key]: update?.[key] || current[key] },
       }),
       {} as Record<K, string>
     );
   };
 
-  return { merge, inject };
-};
+  return {
+    merge,
+  };
+}
