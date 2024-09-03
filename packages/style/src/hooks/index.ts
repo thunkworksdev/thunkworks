@@ -1,2 +1,1 @@
-export * from './use-class-middleware';
-export * from './use-class-names';
+export * from './use-class-names/use-class-names';

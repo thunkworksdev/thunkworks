@@ -20,6 +20,13 @@
   "scripts": {
     "build": "tsup src/index.ts --dts"
   },
+  "imports": {
+    "#*": "./src/*",
+    "#components*": "./src/components/index.ts",
+    "#factory*": "./src/factory/index.ts",
+    "#config*": "./src/config/index.ts",
+    "#utils*": "./src/utils/index.ts"
+  },
   "devDependencies": {
     "@types/eslint": "^9.6.0",
     "@types/node": "^20",

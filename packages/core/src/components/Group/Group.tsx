@@ -1,23 +1,35 @@
-import './Group.css';
-import { THUNKWORKS } from '@thunkworks/types';
-import { createFactoryPolymorphic } from '../../factory';
+import Thunkworks from '@thunkworks/types';
+import { useClassNames } from '@thunkworks/style';
+import { PolymorphComponent } from '#factory';
 
-export interface GroupProps {
-  orientation?: THUNKWORKS.Orientation | undefined;
-}
-
-export type GroupFactory = THUNKWORKS.Factory<{
-  component: 'div';
-  reference: HTMLDivElement;
-  properties: GroupProps;
-  classNames: THUNKWORKS.ClassNames['Group'];
-  variant: THUNKWORKS.Variants['Group'];
+export type GroupFactory = Thunkworks.PolymorphFactory<{
+  ref: Thunkworks.IntrinsicRefs['Group'];
+  classNames: Thunkworks.IntrinsicClassNames['Group'];
+  component: Thunkworks.IntrinsicElements['Group'];
+  props: Thunkworks.GroupProps;
 }>;
 
-export const Group = createFactoryPolymorphic<GroupFactory>((props, ref) => {
-  const { as: Component = 'div', children, orientation = 'horizontal', ...otherProps } = props;
+export const GROUP_COMPONENT: Thunkworks.IntrinsicElements['Group'] = 'div';
+export const GROUP_CLASSNAMES: Thunkworks.IntrinsicClassNames['Group'] = {
+  root: `thwx-group`,
+};
+
+export const Group = PolymorphComponent<GroupFactory>((props, ref) => {
+  const {
+    children,
+    className,
+    classNames = GROUP_CLASSNAMES,
+    component: Component = GROUP_COMPONENT,
+    ...forwardedProps
+  } = props;
+
+  const { cx } = useClassNames(GROUP_CLASSNAMES, {
+    classNames,
+    className,
+  });
+
   return (
-    <Component ref={ref} {...otherProps}>
+    <Component {...forwardedProps} {...cx('root')} ref={ref}>
       {children}
     </Component>
   );
