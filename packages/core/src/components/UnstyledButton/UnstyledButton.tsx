@@ -1,34 +1,27 @@
-import { THUNKWORKS } from '@thunkworks/types';
-import { createFactoryPolymorphic } from '../../factory';
+import Thunkworks from '@thunkworks/types';
+import { useClassNames } from '@thunkworks/style';
+import { PolymorphComponent } from '#factory';
 
-export interface UnstyledButtonProps {
-  loading?: boolean;
-  disabled?: boolean;
-}
+export const UNSTYLED_BUTTON_CLASSNAMES: Thunkworks.IntrinsicClassNames['UnstyledButton'] = {
+  root: `thwx-button-u`,
+};
 
-export type UnstyledButtonFactory = THUNKWORKS.Factory<{
-  component: 'button';
-  reference: HTMLButtonElement;
-  properties: UnstyledButtonProps;
+export type UnstyledButtonFactory = Thunkworks.PolymorphFactory<{
+  ref: Thunkworks.IntrinsicRefs['UnstyledButton'];
+  classNames: Thunkworks.IntrinsicClassNames['UnstyledButton'];
+  component: Thunkworks.IntrinsicElements['UnstyledButton'];
+  props: Thunkworks.UnstyledButtonProps;
 }>;
 
-export const UnstyledButton = createFactoryPolymorphic<UnstyledButtonFactory>((props, ref) => {
-  const { as: Component = 'button', disabled, loading, children, ...otherProps } = props;
+export const UnstyledButton = PolymorphComponent<UnstyledButtonFactory>((props, ref) => {
+  const { className, classNames, component: Component = 'button', ...forwardedProps } = props;
 
-  const isLoading = !!loading || undefined;
-  const isDisabled = !!disabled || undefined;
+  const { cx } = useClassNames(UNSTYLED_BUTTON_CLASSNAMES, {
+    className,
+    classNames,
+  });
 
-  return (
-    <Component
-      ref={ref}
-      disabled={isDisabled}
-      data-disabled={isDisabled}
-      data-loading={isLoading}
-      {...otherProps}
-    >
-      {children}
-    </Component>
-  );
+  return <Component {...forwardedProps} ref={ref} {...cx('root')} />;
 });
 
 UnstyledButton.displayName = '@thunkworks/core/UnstyledButton';

@@ -1,2 +1,3 @@
-export * from './create-factory/create-factory';
-export * from './create-factory-polymorphic/create-factory-polymorphic';
+export * from './base/BaseComponent';
+export * from './forward/ForwardComponent';
+export * from './polymorph/PolymorphComponent';

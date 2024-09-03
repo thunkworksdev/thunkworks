@@ -1,15 +1,14 @@
 import '@/styles/globals.css';
-import React from 'react';
-import { AppHead, MdxProvider } from '@/components';
 import type { AppProps } from 'next/app';
+import { AppHead, MDXContextProvider } from '@/components';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <React.Fragment>
+    <>
       <AppHead />
-      <MdxProvider>
+      <MDXContextProvider>
         <Component {...pageProps} />
-      </MdxProvider>
-    </React.Fragment>
+      </MDXContextProvider>
+    </>
   );
 }

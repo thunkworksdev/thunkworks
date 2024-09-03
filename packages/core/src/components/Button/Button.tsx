@@ -1,70 +1,54 @@
-import './Button.css';
-import React from 'react';
-import { THUNKWORKS } from '@thunkworks/types';
+import Thunkworks from '@thunkworks/types';
 import { useClassNames } from '@thunkworks/style';
-import { UnstyledButtonProps } from '../UnstyledButton';
-import { createFactoryPolymorphic } from '../../factory';
+import { ButtonGroup } from '#components/Button/ButtonGroup';
+import { PolymorphComponent } from '#factory';
 
-export interface ButtonProps extends UnstyledButtonProps {
-  leftContent?: React.ReactNode;
-  rightContent?: React.ReactNode;
+export interface ButtonComponents {
+  Group: typeof ButtonGroup;
 }
 
-export type ButtonFactory = THUNKWORKS.Factory<{
-  component: 'button';
-  reference: HTMLButtonElement;
-  properties: ButtonProps;
-  classNames: THUNKWORKS.ClassNames['Button'];
-  variant: THUNKWORKS.Variants['Button'];
-}>;
+export const BUTTON_COMPONENT: Thunkworks.IntrinsicElements['Button'] = 'button';
 
-const defaultProps = {
-  variant: 'default',
-  classNames: {
-    root: 'thwx-button',
-    label: 'thwx-button-label',
-    layout: 'thwx-button-layout',
-    content: 'thwx-button-content',
-  },
+export const BUTTON_CLASSNAMES: Thunkworks.IntrinsicClassNames['Button'] = {
+  root: `thwx-button`,
+  label: `thwx-button-label`,
+  layout: `thwx-button-layout`,
 };
 
-export const Button = createFactoryPolymorphic<ButtonFactory>((props, ref) => {
+export type ButtonFactory = Thunkworks.PolymorphFactory<{
+  ref: Thunkworks.IntrinsicRefs['Button'];
+  classNames: Thunkworks.IntrinsicClassNames['Button'];
+  components: ButtonComponents;
+  component: Thunkworks.IntrinsicElements['Button'];
+  props: Thunkworks.ButtonProps;
+}>;
+
+export const Button = PolymorphComponent<ButtonFactory>((props, ref) => {
   const {
-    loading,
-    disabled,
     children,
     className,
     classNames,
     leftContent,
     rightContent,
-    as: Component = 'button',
-    ...otherProps
+    component: Component = 'button',
+    ...forwardedProps
   } = props;
 
-  const hasLeftContent = !!leftContent;
-  const hasRightContent = !!rightContent;
-
-  const { css } = useClassNames({ defaultProps, classNames });
+  const { cx } = useClassNames(BUTTON_CLASSNAMES, {
+    classNames,
+    className,
+  });
 
   return (
-    <Component className={css.root} ref={ref} {...otherProps}>
-      <span className={css.layout}>
-        {hasLeftContent && (
-          <span className={css.content} data-position="left">
-            {leftContent}
-          </span>
-        )}
-
-        <div className={css.label}>{children}</div>
-
-        {hasRightContent && (
-          <span className={css.content} data-position="right">
-            {rightContent}
-          </span>
-        )}
+    <Component {...forwardedProps} ref={ref} {...cx('root')}>
+      <span {...cx('layout')}>
+        {leftContent && <div data-position="left">{leftContent}</div>}
+        <div {...cx('label')}>{children}</div>
+        {rightContent && <div data-position="right">{rightContent}</div>}
       </span>
     </Component>
   );
 });
 
+Button.Group = ButtonGroup;
 Button.displayName = '@thunkworks/core/Button';

@@ -1,14 +1,13 @@
-import Link from 'next/link';
+import Link, { type LinkProps } from 'next/link';
+import Thunkworks from '@thunkworks/types';
+import { PREFIX } from '@thunkworks/core';
 
-type MdxLinkProps = React.ComponentPropsWithoutRef<'a'>;
-type MdxLinkComponent = React.FC<MdxLinkProps>;
+export interface MDXLinkComponent extends Thunkworks.NamedComponent {
+  (props: Thunkworks.ComponentPropsWithoutRef<'a'> & Partial<LinkProps>): React.ReactNode;
+}
 
-export const MdxLink: MdxLinkComponent = ({ href = '/', children, ...forwardedProps }) => {
-  return (
-    <Link href={href} {...forwardedProps}>
-      {children}
-    </Link>
-  );
+export const MDXLink: MDXLinkComponent = ({ href = '/', ...props }) => {
+  return <Link href={href} className={`${PREFIX}-mdx-link`} {...props} />;
 };
 
-MdxLink.displayName = '@thunkworks.MdxLink';
+MDXLink.displayName = '@thunkworks/docs/MDXText';

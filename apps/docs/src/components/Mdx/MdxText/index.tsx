@@ -1,10 +1,12 @@
-import cx from 'clsx';
+import { PREFIX } from '@thunkworks/core';
+import Thunkworks from '@thunkworks/types';
 
-type MdxTextProps = React.JSX.IntrinsicElements['p'];
-type MdxTextComponent = React.FC<MdxTextProps>;
+export interface MDXTextComponent extends Thunkworks.NamedComponent {
+  (props: Thunkworks.ComponentPropsWithoutRef<'p'>): React.ReactNode;
+}
 
-export const MdxText: MdxTextComponent = ({ className, ...otherProps }) => {
-  return <p className={cx('thwx-mdx-text', className)} {...otherProps} />;
+export const MDXText: MDXTextComponent = ({ ...props }) => {
+  return <p className={`${PREFIX}-mdx-text`} {...props} />;
 };
 
-MdxText.displayName = '@thunkworks/MdxText';
+MDXText.displayName = '@thunkworks/docs/MDXText';

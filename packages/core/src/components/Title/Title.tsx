@@ -1,27 +1,22 @@
-import './Title.css';
-import { THUNKWORKS } from '@thunkworks/types';
-import { findComponent } from '../../utils';
-import { createFactoryPolymorphic } from '../../factory';
+import Thunkworks from '@thunkworks/types';
+import { useClassNames } from '@thunkworks/style';
+import { PolymorphComponent } from '#factory';
 
-export type TitleProps = THUNKWORKS.TitleElementProps & {};
-
-export type TitleFactory = THUNKWORKS.Factory<{
-  component: 'h2';
-  reference: HTMLHeadingElement;
-  properties: TitleProps;
-  classNames: THUNKWORKS.ClassNames['Title'];
+export type TitleFactory = Thunkworks.PolymorphFactory<{
+  ref: Thunkworks.IntrinsicRefs['Title'];
+  classNames: Thunkworks.IntrinsicClassNames['Title'];
+  component: Thunkworks.IntrinsicElements['Title'];
+  props: Thunkworks.TitleProps;
 }>;
 
-export const Title = createFactoryPolymorphic<TitleFactory>((props, ref) => {
-  const { as, h1, h2, h3, h4, h5, h6, children, ...otherProps } = props;
+export const TITLE_CLASSNAMES: Thunkworks.IntrinsicClassNames['Title'] = { root: `thwx-title` };
 
-  const Component = findComponent({ h1, h2, h3, h4, h5, h6 }, as || 'h2');
+export const Title = PolymorphComponent<TitleFactory>((props, ref) => {
+  const { className, classNames, component: Component = 'h2', ...forwardedProps } = props;
 
-  return (
-    <Component ref={ref} {...otherProps}>
-      {children}
-    </Component>
-  );
+  const { cx } = useClassNames(TITLE_CLASSNAMES, { classNames, className });
+
+  return <Component {...forwardedProps} {...cx('root')} ref={ref} />;
 });
 
 Title.displayName = '@thunkworks/core/Title';

@@ -1,6 +1,7 @@
 {
   "name": "@thunkworks/types",
-  "main": "src/index.ts",
+  "main": "",
+  "types": "src/index.d.ts",
   "version": "0.1.0",
   "license": "MIT",
   "author": "Andrew Lenhart <andrew@thunkworks.dev>",
@@ -15,7 +16,7 @@
     "url": "https://github.com/thunkworksdev/thunkworks/issues"
   },
   "scripts": {
-    "build": "tsup src/index.ts --dts"
+    "build": "tsup src --dts-only"
   },
   "devDependencies": {
     "@types/eslint": "^9.6.0",
