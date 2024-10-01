@@ -6,10 +6,11 @@ interface AppFooterComponent extends Thunkworks.NamedComponent {
 
 export const AppFooter: AppFooterComponent = () => {
   return (
-    <div>
-      <span>App Footer</span>
+    <div className='thwx-app-footer'>
+      <div className='thwx-app-footer-layout'>
+      </div>
     </div>
   );
 };
 
-AppFooter.displayName = '@thunkworks/docs/AppFooter';
+AppFooter.displayName = '@thwx/App.Footer';

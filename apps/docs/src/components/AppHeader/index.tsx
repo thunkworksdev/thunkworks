@@ -1,15 +1,18 @@
 import Thunkworks from '@thunkworks/types';
 
+interface AppHeaderProps {};
+
 interface AppHeaderComponent extends Thunkworks.NamedComponent {
-  (props: {}): Thunkworks.Node;
+  (props: AppHeaderProps): React.ReactNode;
 }
 
-export const AppHeader: AppHeaderComponent = () => {
+export const AppHeader: AppHeaderComponent = ({ ...props }) => {
   return (
-    <div>
-      <span>App Header</span>
-    </div>
+    <header className='thwx-app-header'>
+      <div className='thwx-app-header-layout'>
+      </div>
+    </header>
   );
 };
 
-AppHeader.displayName = '@thunkworks/docs/AppHeader';
+AppHeader.displayName = '@thwx/App.Header';

@@ -1,8 +1,8 @@
 import Head from 'next/head';
 
-export const AppHead: React.FC<{}> = ({}) => (
+export const AppHead: React.FC<{ title?: string }> = ({ title = 'Thunkworks' }) => (
   <Head>
-    <title>Thunkworks</title>
+    <title>{title}</title>
     <link rel="shortcut icon" href="/images/favicon.svg" />
     <meta
       name="viewport"
@@ -17,4 +17,4 @@ export const AppHead: React.FC<{}> = ({}) => (
   </Head>
 );
 
-AppHead.displayName = '@thunkworks/App.Head';
+AppHead.displayName = '@thwx/App.Head';
