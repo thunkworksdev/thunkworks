@@ -1,0 +1,33 @@
+{
+  "name": "@thunkworks/types",
+  "main": "",
+  "types": "src/index.d.ts",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Andrew Lenhart <andrew@thunkworks.dev>",
+  "homepage": "https://thunkworks.dev/",
+  "description": "Thunkworks Types",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thunkworksdev/thunkworks.git",
+    "directory": "packages/types"
+  },
+  "bugs": {
+    "url": "https://github.com/thunkworksdev/thunkworks/issues"
+  },
+  "scripts": {
+    "build": "tsup src --dts-only"
+  },
+  "devDependencies": {
+    "@types/eslint": "^9.6.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "react": "^18",
+    "react-dom": "^18"
+  }
+}
