@@ -7,12 +7,11 @@ export interface ButtonComponents {
   Group: typeof ButtonGroup;
 }
 
-export const BUTTON_COMPONENT: Thunkworks.IntrinsicElements['Button'] = 'button';
-
 export const BUTTON_CLASSNAMES: Thunkworks.IntrinsicClassNames['Button'] = {
   root: `thwx-button`,
   label: `thwx-button-label`,
   layout: `thwx-button-layout`,
+  content: 'thwx-button-content',
 };
 
 export type ButtonFactory = Thunkworks.PolymorphFactory<{

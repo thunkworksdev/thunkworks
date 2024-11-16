@@ -1,10 +1,4 @@
-import Thunkworks from '@thunkworks/types';
-
-interface AppFooterComponent extends Thunkworks.NamedComponent {
-  (props: {}): Thunkworks.Node;
-}
-
-export const AppFooter: AppFooterComponent = () => {
+export const AppFooter = () => {
   return (
     <div>
       <span>App Footer</span>

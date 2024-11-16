@@ -1,7 +1,5 @@
 {
   "name": "@thunkworks/types",
-  "main": "",
-  "types": "src/index.d.ts",
   "version": "0.1.0",
   "license": "MIT",
   "author": "Andrew Lenhart <andrew@thunkworks.dev>",

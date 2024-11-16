@@ -23,6 +23,7 @@
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
     "@next/mdx": "^14.2.5",
+    "@thunkworks/types": "workspace:*",
     "@thunkworks/core": "workspace:*",
     "@thunkworks/hooks": "workspace:*",
     "@thunkworks/style": "workspace:*",
@@ -34,7 +35,6 @@
     "remark-slug": "^7.0.1"
   },
   "devDependencies": {
-    "@thunkworks/types": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

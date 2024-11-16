@@ -14,7 +14,7 @@ const nextConfig = {
   output: 'export',
   trailingSlash: true,
   reactStrictMode: true,
-  pageExtensions: ['tsx', 'mdx'],
+  pageExtensions: ['tsx', 'mdx', 'ts'],
   eslint: {
     ignoreDuringBuilds: true,
   },

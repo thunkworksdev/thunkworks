@@ -1,8 +1,8 @@
-import React from 'react';
-import { PolymorphPayload, PolymorphRenderType, PolymorphReturnType } from '@thunkworks/types';
+import React, { forwardRef } from 'react';
+import type { PolymorphPayload, PolymorphRenderType, PolymorphReturnType } from '@thunkworks/types';
 
 export function PolymorphComponent<Payload extends PolymorphPayload>(
   ui: PolymorphRenderType<Payload>
 ): PolymorphReturnType<Payload> {
-  return React.forwardRef(ui) as unknown as PolymorphReturnType<Payload>;
+  return forwardRef(ui as PolymorphRenderType<Payload>) as unknown as PolymorphReturnType<Payload>;
 }

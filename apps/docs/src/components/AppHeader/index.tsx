@@ -1,10 +1,4 @@
-import Thunkworks from '@thunkworks/types';
-
-interface AppHeaderComponent extends Thunkworks.NamedComponent {
-  (props: {}): Thunkworks.Node;
-}
-
-export const AppHeader: AppHeaderComponent = () => {
+export const AppHeader = () => {
   return (
     <div>
       <span>App Header</span>

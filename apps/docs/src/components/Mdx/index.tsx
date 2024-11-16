@@ -26,5 +26,3 @@ export const MDXContextProvider: MDXContextProviderComponent = ({ children }) =>
     </MDXProvider>
   );
 };
-
-MDXContextProvider.displayName = '@thunkworks/docs/MDXContextProvider';

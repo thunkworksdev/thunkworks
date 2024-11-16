@@ -1,6 +1,7 @@
 import Thunkworks from '@thunkworks/types';
 import { useClassNames } from '@thunkworks/style';
 import { PolymorphComponent } from '#factory';
+import { Button } from './Button';
 
 export type ButtonGroupFactory = Thunkworks.PolymorphFactory<{
   ref: Thunkworks.IntrinsicRefs['ButtonGroup'];

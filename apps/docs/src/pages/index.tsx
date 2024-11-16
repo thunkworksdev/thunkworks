@@ -1,6 +1,7 @@
 import Head from 'next/head';
-import { Manrope } from 'next/font/google';
 import Link from 'next/link';
+import { Manrope } from 'next/font/google';
+import { Button } from '@thunkworks/core';
 
 const manrope = Manrope({ subsets: ['latin'] });
 
@@ -54,6 +55,8 @@ export default function Home() {
             <Link href={item.href}>{item.label}</Link>
           </li>
         ))}
+
+        <Button></Button>
       </main>
     </>
   );
